@@ -4,9 +4,9 @@ export const projectSlice = createSlice({
   name: 'project',
   initialState: {
     projectList: [
-      // { name: '', dateCreated: '' }
-      // { name: '', dateCreated: '' }
-      // { name: '', dateCreated: '' }
+      { id: 1, name: 'first', dateCreated: 'Friday, March 3, 2023' },
+      { id: 2, name: 'second', dateCreated: 'Friday, March 3, 2023' },
+      { id: 3, name: 'third', dateCreated: 'Friday, March 3, 2023' }
     ]
   },
   reducers: {
@@ -17,13 +17,17 @@ export const projectSlice = createSlice({
     createProject: (state, action) => {
       state.projectList.push({
         name: action.payload.project,
-        dateCreated: new Date()
+        dateCreated: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       })
     },
-  },
+    deleteProject: (state, action) => {
+      const newProjectList = state.projectList.filter(project => project.name !== action.payload)
+      state.projectList = newProjectList
+    }
+  }
 })
 
 // Action creators are generated for each case reducer function
-export const { createProject } = projectSlice.actions
+export const { createProject, updateProject, deleteProject } = projectSlice.actions
 
 export default projectSlice.reducer

@@ -1,12 +1,20 @@
-import React from 'react'
-import CreateProject from './components/CreateProject'
+import React, { useState } from 'react'
+import { Button } from 'antd'
+import ProjectForm from './components/ProjectForm'
 import ProjectList from './components/ProjectList'
 
 const App = () => {
+  const [createProject, setCreateProject] = useState(false)
+
   return (
     <div>
       Thunkable App
-      <CreateProject />
+      <Button
+        onClick={() => setCreateProject(createProject => !createProject)}
+      >
+        Add
+      </Button>
+      {createProject && <ProjectForm type='create' setView={setCreateProject} />}
       <ProjectList />
     </div>
   )

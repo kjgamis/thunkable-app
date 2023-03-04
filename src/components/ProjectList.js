@@ -6,8 +6,8 @@ const ProjectList = () => {
   const { projectList } = useSelector(state => state.project)
   return (
     <div>
-      {projectList.length > 0 && projectList.map(({ name, dateCreated }) =>
-        <ProjectItem name={name} dateCreated={dateCreated} />
+      {projectList.length > 0 && projectList.map(({ id, name, dateCreated }) =>
+        <ProjectItem id={id} name={name} dateCreated={dateCreated} />
       )}
     </div>
   )

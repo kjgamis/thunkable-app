@@ -18,7 +18,7 @@ export const projectSlice = createSlice({
     createProject: (state, action) => {
       state.projectList.push({
         id: uuidv4(),
-        name: action.payload,
+        name: action.payload.name,
         dateCreated: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       })
     },

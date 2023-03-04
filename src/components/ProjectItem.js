@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Card, Button } from 'antd'
-import { deleteProject } from '../redux/project'
+import { updateProject, deleteProject } from '../redux/project'
 import ProjectForm from './ProjectForm'
 
 const ProjectItem = ({ id, name, dateCreated }) => {
   const dispatch = useDispatch()
   const [editProject, setEditProject] = useState(false)
 
-  const handleDelete = () => {
+  const handleUpdateProject = ({ name }) => {
+    dispatch(updateProject({ name, id }))
+    setEditProject(false)
+  }
+  
+  const handleDeleteProject = () => {
     dispatch(deleteProject(name))
   }
 
@@ -16,7 +21,7 @@ const ProjectItem = ({ id, name, dateCreated }) => {
     <Card>
       {editProject ? (
         <div>
-          <ProjectForm type='update' setView={setEditProject} id={id} />
+          <ProjectForm onSubmit={handleUpdateProject} />
         </div>
       ) : (
         <div>
@@ -28,7 +33,7 @@ const ProjectItem = ({ id, name, dateCreated }) => {
         </div>
       )}
       {dateCreated}
-      <Button onClick={handleDelete}>Delete</Button>
+      <Button onClick={handleDeleteProject}>Delete</Button>
     </Card>
   )
 }

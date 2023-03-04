@@ -1,20 +1,28 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button } from 'antd'
 import ProjectForm from './components/ProjectForm'
 import ProjectList from './components/ProjectList'
+import { createProject } from './redux/project'
 
 const App = () => {
-  const [createProject, setCreateProject] = useState(false)
+  const dispatch = useDispatch()
+  const [newProject, setNewProject] = useState(false)
+
+  const handleCreateProject = ({ name }) => {
+    dispatch(createProject({ name }))
+    setNewProject(false)
+  }
 
   return (
     <div>
       Thunkable App
       <Button
-        onClick={() => setCreateProject(createProject => !createProject)}
+        onClick={() => setNewProject(newProject => !newProject)}
       >
         Add
       </Button>
-      {createProject && <ProjectForm type='create' setView={setCreateProject} />}
+      {newProject && <ProjectForm onSubmit={handleCreateProject} />}
       <ProjectList />
     </div>
   )

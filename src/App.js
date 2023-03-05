@@ -1,29 +1,14 @@
-import React, { useState } from 'react'
-import { FloatButton } from 'antd'
-import ProjectList from './components/ProjectList'
-import ProjectItem from './components/ProjectItem'
+import React from 'react'
+import { Layout } from 'antd'
 import Header from './components/Header'
-import { ReactComponent as PlusIconSvg } from './assets/PlusSign.svg'
+import Content from './components/Content'
 
 const App = () => {
-  const [newProject, setNewProject] = useState(false)
-
-  const handleCreateProject = () => {
-    setNewProject(false)
-  }
-
   return (
-    <div>
+    <Layout>
       <Header />
-      <FloatButton
-        type='primary'
-        onClick={() => setNewProject(newProject => !newProject)}
-        style={{ top: 150, right: 125 }}
-        icon={<PlusIconSvg />}
-      />
-      {newProject && <ProjectItem type='create' onSubmit={handleCreateProject} />}
-      <ProjectList />
-    </div>
+      <Content />
+    </Layout>
   )
 }
 

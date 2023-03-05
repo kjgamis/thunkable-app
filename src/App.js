@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button  } from 'antd'
+import { FloatButton } from 'antd'
 import ProjectForm from './components/ProjectForm'
 import ProjectList from './components/ProjectList'
 import Header from './components/Header'
 import { createProject } from './redux/project'
+import { ReactComponent as PlusIconSvg } from './assets/PlusSign.svg'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -18,11 +19,12 @@ const App = () => {
   return (
     <div>
       <Header />
-      <Button
+      <FloatButton
+        type='primary'
         onClick={() => setNewProject(newProject => !newProject)}
-      >
-        Add
-      </Button>
+        style={{ top: 150, right: 125 }}
+        icon={<PlusIconSvg />}
+      />
       {newProject && <ProjectForm onSubmit={handleCreateProject} />}
       <ProjectList />
     </div>

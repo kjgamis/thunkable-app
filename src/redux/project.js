@@ -5,9 +5,9 @@ export const projectSlice = createSlice({
   name: 'project',
   initialState: {
     projectList: [
-      { id: 1, name: 'first', dateCreated: 'Friday, March 3, 2023' },
-      { id: 2, name: 'second', dateCreated: 'Friday, March 3, 2023' },
-      { id: 3, name: 'third', dateCreated: 'Friday, March 3, 2023' }
+      // { id: 1, name: 'first', dateCreated: 'Friday, March 3, 2023' },
+      // { id: 2, name: 'second', dateCreated: 'Friday, March 3, 2023' },
+      // { id: 3, name: 'third', dateCreated: 'Friday, March 3, 2023' }
     ]
   },
   reducers: {
@@ -19,7 +19,7 @@ export const projectSlice = createSlice({
       state.projectList.push({
         id: uuidv4(),
         name: action.payload.name,
-        dateCreated: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+        dateCreated: new Date().toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })
       })
     },
     updateProject: (state, action) => {

@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Card, Button, Modal } from 'antd'
+import { Card, Button, Modal, Image, Typography, Col, Row } from 'antd'
 import Icon from '@ant-design/icons'
+const { Text } = Typography
 const { confirm } = Modal
-import { updateProject, deleteProject } from '../redux/project'
+import { updateProject, deleteProject, createProject } from '../redux/project'
 import ProjectForm from './ProjectForm'
+import ProjectIcon from '../assets/defaultProjectIcon_2x.png'
 import { ReactComponent as DeleteIconSvg } from '../assets/DeleteIcon.svg'
 import { ReactComponent as EditIconSvg } from '../assets/EditIcon.svg'
 import { ReactComponent as QuestionIconSvg } from '../assets/Question.svg'
 
-const ProjectItem = ({ id, name, dateCreated }) => {
+const ProjectItem = ({ id, name, dateCreated, type, onSubmit }) => {
   const dispatch = useDispatch()
   const [editProject, setEditProject] = useState(false)
 
@@ -20,6 +22,11 @@ const ProjectItem = ({ id, name, dateCreated }) => {
 
   const handleDeleteProject = () => {
     dispatch(deleteProject(name))
+  }
+
+  const handleCreateProject = ({ name }) => {
+    dispatch(createProject({ name }))
+    onSubmit()
   }
 
   const showDeleteConfirm = () => {
@@ -36,28 +43,55 @@ const ProjectItem = ({ id, name, dateCreated }) => {
 
   return (
     <Card>
-      {editProject ? (
-        <div>
-          <ProjectForm onSubmit={handleUpdateProject} />
-        </div>
-      ) : (
-        <div>
-          {name}
-          <Button
-            onClick={() => setEditProject(editProject => !editProject)}
-            ghost
-            size='small'
-            icon={<EditIconSvg />}
-          />
-        </div>
-      )}
-      {dateCreated}
-      <Button
-        onClick={() => showDeleteConfirm()}
-        ghost
-        size='small'
-        icon={<DeleteIconSvg />}
-      />
+      <Row>
+        <Col span={2}>
+          <Image src={ProjectIcon} width={25} />
+        </Col>
+        {type === 'create' && (
+          <Fragment>
+            <Col span={4}>
+              <ProjectForm onSubmit={handleCreateProject} />
+            </Col>
+          </Fragment>
+        )}
+        {type === 'edit' && (
+          <Fragment>
+            {editProject && (
+              <Fragment>
+                <Col span={4}>
+                  <ProjectForm onSubmit={handleUpdateProject} />
+                </Col>
+                <Col span={4} />
+              </Fragment>
+            )}
+            {!editProject && (
+              <Fragment>
+                <Col span={4}>
+                  <Text strong>{name}</Text>
+                </Col>
+                <Col span={4}>
+                  <Button
+                    onClick={() => setEditProject(editProject => !editProject)}
+                    ghost
+                    size='small'
+                    icon={<EditIconSvg />}
+                  /></Col>
+              </Fragment>
+            )}
+            <Col span={12}>
+              <Text type='secondary'>{dateCreated}</Text>
+            </Col>
+            <Col span={2}>
+              <Button
+                onClick={() => showDeleteConfirm()}
+                ghost
+                size='small'
+                icon={<DeleteIconSvg />}
+              />
+            </Col>
+          </Fragment>
+        )}
+      </Row>
     </Card>
   )
 }

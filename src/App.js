@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button } from 'antd'
+import { Button  } from 'antd'
 import ProjectForm from './components/ProjectForm'
 import ProjectList from './components/ProjectList'
+import Header from './components/Header'
 import { createProject } from './redux/project'
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
 
   return (
     <div>
-      Thunkable App
+      <Header />
       <Button
         onClick={() => setNewProject(newProject => !newProject)}
       >

@@ -6,16 +6,16 @@ Built for the [Thunkable](https://thunkable.com/) Technical Assessment.
 ## Features
 
 ### Display project list
-![project list image](/public/list.png)
+![project list image](/src/assets/list.png)
 
 ### Add a new project
-![create project gif](/public/create.gif)
+![create project gif](/src/assets/create.gif)
 
 ### Rename project
-![edit project gif](/public/edit.gif)
+![edit project gif](/src/assets/edit.gif)
 
 ### Delete project
-![delete project gif](/public/delete.gif)
+![delete project gif](/src/assets/delete.gif)
 
 ## Getting Started
 Install required dependencies

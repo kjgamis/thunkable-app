@@ -7,9 +7,9 @@ const { confirm } = Modal
 import { updateProject, deleteProject, createProject } from '../redux/project'
 import ProjectForm from './ProjectForm'
 import ProjectIcon from '../assets/defaultProjectIcon_2x.png'
-import { ReactComponent as DeleteIconSvg } from '../assets/DeleteIcon.svg'
-import { ReactComponent as EditIconSvg } from '../assets/EditIcon.svg'
-import { ReactComponent as QuestionIconSvg } from '../assets/Question.svg'
+import DeleteIconSvg  from '../assets/DeleteIcon.svg'
+import EditIconSvg  from '../assets/EditIcon.svg'
+import QuestionIconSvg  from '../assets/Question.svg'
 
 const ProjectItem = ({ id, name, dateCreated, type, onSubmit }) => {
   const dispatch = useDispatch()
